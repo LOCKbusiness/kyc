@@ -1,0 +1,65 @@
+import i18n from "../i18n/i18n";
+import { formatAmount } from "../utils/Utils";
+
+export enum KycStatus {
+  NA = "NA",
+  CHATBOT = "Chatbot",
+  ONLINE_ID = "OnlineId",
+  VIDEO_ID = "VideoId",
+  CHECK = "Check",
+  MANUAL = "Manual",
+  COMPLETED = "Completed",
+  REJECTED = "Rejected",
+}
+
+export enum KycState {
+  NA = "NA",
+  FAILED = "Failed",
+  REMINDED = "Reminded",
+  REVIEW = "Review",
+}
+
+export enum AccountType {
+  PERSONAL = "Personal",
+  BUSINESS = "Business",
+  SOLE_PROPRIETORSHIP = "SoleProprietorship",
+}
+
+export interface KycInfo {
+  kycStatus: KycStatus;
+  kycState: KycState;
+  kycDataComplete: boolean;
+  kycHash: string;
+  accountType: AccountType;
+  depositLimit: number;
+  sessionUrl?: string;
+  setupUrl?: string;
+  blankedPhone?: string;
+  blankedMail?: string;
+}
+
+export const kycNotStarted = (kycStatus?: KycStatus) => [KycStatus.NA].includes(kycStatus ?? KycStatus.NA);
+
+export const kycCompleted = (kycStatus?: KycStatus) =>
+  [KycStatus.MANUAL, KycStatus.COMPLETED].includes(kycStatus ?? KycStatus.NA);
+
+export const kycInProgress = (kycStatus?: KycStatus) =>
+  [KycStatus.CHATBOT, KycStatus.ONLINE_ID, KycStatus.VIDEO_ID].includes(kycStatus ?? KycStatus.NA);
+
+export const getKycStatusString = (user: KycInfo): string => {
+  if (kycInProgress(user.kycStatus)) {
+    return `${i18n.t("model.kyc." + user.kycState.toLowerCase())} (${i18n.t(
+      "model.kyc." + user.kycStatus.toLowerCase()
+    )})`;
+  } else {
+    return i18n.t(`model.kyc.${user.kycStatus.toLowerCase()}`);
+  }
+};
+
+export const getTradeLimit = (user: KycInfo): string => {
+  if (kycCompleted(user.kycStatus)) {
+    return `${formatAmount(user.depositLimit)} € ${i18n.t("model.user.per_year")}`;
+  } else {
+    return `${formatAmount(user.kycStatus === KycStatus.REJECTED ? 0 : 900)} € ${i18n.t("model.user.per_day")}`;
+  }
+};
