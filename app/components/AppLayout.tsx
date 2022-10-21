@@ -1,6 +1,7 @@
 import React, { createRef, ReactNode, RefObject, useState } from "react";
 import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { FAB, Portal } from "react-native-paper";
+import Colors from "../config/Colors";
 import Sizes from "../config/Sizes";
 import { SpacerV } from "../elements/Spacers";
 import withSettings from "../hocs/withSettings";
@@ -8,11 +9,11 @@ import { AppSettings } from "../services/SettingsService";
 import AppStyles from "../styles/AppStyles";
 import Header from "./Header";
 
-interface AppLayoutProps { 
-  settings?: AppSettings; 
-  preventScrolling?: boolean; 
-  removeHeaderSpace?: boolean, 
-  children: ReactNode 
+interface AppLayoutProps {
+  settings?: AppSettings;
+  preventScrolling?: boolean;
+  removeHeaderSpace?: boolean;
+  children: ReactNode;
 }
 
 const AppLayout = ({ settings, preventScrolling, removeHeaderSpace, children }: AppLayoutProps) => {
@@ -33,16 +34,14 @@ const AppLayout = ({ settings, preventScrolling, removeHeaderSpace, children }: 
           onScroll={(scrollEvent) => setContentOffset(scrollEvent.nativeEvent.contentOffset.y)}
           scrollEventThrottle={100}
         >
+          {!settings?.isIframe && (
+            <View style={[styles.headerContainer]}>
+              <Header />
+            </View>
+          )}
           <View style={[AppStyles.container, styles.container]}>
             <View style={[AppStyles.container, styles.appContainer]}>
-              {!settings?.isIframe && (
-                <>
-                  <Header></Header>
-                  {!removeHeaderSpace && (
-                    <SpacerV height={20} />
-                  )}
-                </>
-              )}
+              {!removeHeaderSpace && <SpacerV height={20} />}
               {children}
               <Portal>
                 <FAB
@@ -71,6 +70,11 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     padding: Sizes.AppPadding,
+  },
+  headerContainer: {
+    alignItems: "center",
+    padding: Sizes.AppPadding,
+    backgroundColor: Colors.Primary,
   },
   appContainer: {
     width: "100%",

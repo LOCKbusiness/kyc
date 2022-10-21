@@ -1,7 +1,6 @@
 import React, { SetStateAction, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
-import Colors from "../config/Colors";
 import { DeFiButton } from "../elements/Buttons";
 import { Environment } from "../env/Environment";
 import withSettings from "../hocs/withSettings";
@@ -12,7 +11,7 @@ import AppStyles from "../styles/AppStyles";
 import { resolve, openUrl } from "../utils/Utils";
 import DeFiDropdown from "./form/DeFiDropdown";
 
-const HeaderContent = ({ settings }: { settings?: AppSettings }) => {
+const HeaderContent = ({ settings, drawer }: { settings?: AppSettings; drawer?: boolean }) => {
   const { t } = useTranslation();
   const device = useDevice();
 
@@ -24,7 +23,8 @@ const HeaderContent = ({ settings }: { settings?: AppSettings }) => {
     }
   }, [settings]);
 
-  const getLanguage = (symbol: string): Language | undefined => SettingsService.Languages.find((l) => l.symbol === symbol);
+  const getLanguage = (symbol: string): Language | undefined =>
+    SettingsService.Languages.find((l) => l.symbol === symbol);
   const languageChanged = (update: SetStateAction<Language | undefined>) => {
     const language = resolve(update, getLanguage(selectedLanguage));
     if (language) {
@@ -39,9 +39,8 @@ const HeaderContent = ({ settings }: { settings?: AppSettings }) => {
 
   return (
     <View style={device.SM && [AppStyles.containerHorizontalWrap, styles.container]}>
-
       {links.map((link) => (
-        <DeFiButton key={link.key} onPress={() => openUrl(link.url)} style={styles.button} compact>
+        <DeFiButton key={link.key} onPress={() => openUrl(link.url)} style={styles.button} compact header={!drawer}>
           {t(link.key)}
         </DeFiButton>
       ))}
@@ -55,6 +54,7 @@ const HeaderContent = ({ settings }: { settings?: AppSettings }) => {
           labelProp="foreignName"
           title={t("general.select_language")}
           style={styles.button}
+          header={!drawer}
         ></DeFiDropdown>
       )}
     </View>
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "flex-start",
-    color: Colors.White,
   },
 });
 
