@@ -265,33 +265,33 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
             <View>
               {!settings?.isIframe && <SpacerV height={30} />}
 
-              <H2 text={t("model.kyc.status")} />
+              <H2 text={t("model.kyc.status")} style={styles.tableHeader} />
               <SpacerV />
               <DataTable>
                 {!kycNotStarted(kycInfo.kycStatus) && (
-                  <CompactRow>
-                    <CompactCell>{t("model.kyc.status")}</CompactCell>
+                  <CompactRow first>
+                    <CompactCell title>{t("model.kyc.status")}</CompactCell>
                     <CompactCell multiLine>{getKycStatusString(kycInfo)}</CompactCell>
                   </CompactRow>
                 )}
                 <CompactRow>
-                  <CompactCell>{t("model.user.limit")}</CompactCell>
+                  <CompactCell title>{t("model.user.limit")}</CompactCell>
                   <CompactCell>{getTradeLimit(kycInfo)}</CompactCell>
                 </CompactRow>
                 {kycInfo.blankedMail && (
                   <CompactRow>
-                    <CompactCell>{t("model.user.mail")}</CompactCell>
+                    <CompactCell title>{t("model.user.mail")}</CompactCell>
                     <CompactCell>{kycInfo.blankedMail}</CompactCell>
                   </CompactRow>
                 )}
                 {kycInfo.blankedPhone && (
-                  <CompactRow>
-                    <CompactCell>{t("model.user.mobile_number")}</CompactCell>
+                  <CompactRow last>
+                    <CompactCell title>{t("model.user.mobile_number")}</CompactCell>
                     <CompactCell>{kycInfo.blankedPhone}</CompactCell>
                   </CompactRow>
                 )}
               </DataTable>
-              <SpacerV />
+              <SpacerV height={20} />
               {kycInfo.kycState !== KycState.REVIEW && (
                 <ButtonContainer>
                   <DeFiButton mode="contained" onPress={() => continueKyc(kycInfo, inputParams)}>
@@ -311,6 +311,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     flex: 1,
+  },
+  tableHeader: {
+    color: Colors.Primary,
+    marginBottom: 0,
   },
   hiddenIframe: {
     height: 0,

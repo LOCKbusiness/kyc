@@ -6,6 +6,9 @@ import { DefaultCursor } from "../styles/AppStyles";
 
 interface Props {
   multiLine?: boolean;
+  title?: boolean;
+  first?: boolean;
+  last?: boolean;
   children: ReactNode;
   style?: StyleProp<TextStyle>;
 }
@@ -22,20 +25,23 @@ export const CompactTitle = ({ children, style, ...props }: Props) => (
   </DataTable.Title>
 );
 
-export const CompactRow = ({ children, style, ...props }: Props) => (
-  <DataTable.Row style={[styles.row, style]} {...props}>
+export const CompactRow = ({ first, last, children, style, ...props }: Props) => (
+  <DataTable.Row
+    style={[styles.row, style].concat(first ? [styles.firstRow] : []).concat(last ? [styles.lastRow] : [])}
+    {...props}
+  >
     {children}
   </DataTable.Row>
 );
 
-export const CompactCell = ({ multiLine = false, children, style, ...props }: Props) =>
+export const CompactCell = ({ multiLine = false, title = false, children, style, ...props }: Props) =>
   multiLine ? (
     <View style={[styles.multiLineCell, style]}>
-      <Text>{children}</Text>
+      <Text style={title ? [styles.cellTitle] : []}>{children}</Text>
     </View>
   ) : (
     <DataTable.Cell style={[styles.cell, style]} {...props}>
-      {children}
+      <Text style={title ? [styles.cellTitle] : []}>{children}</Text>
     </DataTable.Cell>
   );
 
@@ -48,14 +54,26 @@ const styles = StyleSheet.create({
   },
   row: {
     minHeight: 30,
-    backgroundColor: Colors.LightBlue,
-    borderBottomColor: Colors.Blue,
+    backgroundColor: Colors.White,
+    borderBottomColor: Colors.Grey100,
     ...DefaultCursor,
+  },
+  firstRow: {
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+  },
+
+  lastRow: {
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
   },
   cell: DefaultCursor,
   multiLineCell: {
     flex: 1,
     justifyContent: "center",
     marginVertical: 3,
+  },
+  cellTitle: {
+    color: Colors.Grey400,
   },
 });

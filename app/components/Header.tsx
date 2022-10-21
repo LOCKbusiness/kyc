@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     maxWidth: Sizes.AppWidth,
   },
   logoTouch: {
-    width: 80,
-    height: 30,
+    width: 104,
+    height: 39,
   },
   logo: {
     flex: 1,

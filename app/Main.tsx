@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   },
   snack: {
     maxWidth: 500,
+    backgroundColor: Colors.White,
   },
 });
 
