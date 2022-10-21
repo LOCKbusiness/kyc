@@ -6,7 +6,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { IconButton } from "react-native-paper";
 import { useDevice } from "../hooks/useDevice";
 import HeaderContent from "./HeaderContent";
-import Colors from "../config/Colors";
+import Sizes from "../config/Sizes";
 
 const Header = () => {
   const device = useDevice();
@@ -20,7 +20,7 @@ const Header = () => {
         <Image style={styles.logo} source={require("../assets/logo.svg")} />
       </TouchableOpacity>
 
-      <View style={[AppStyles.container, !device.SM && AppStyles.noDisplay]}>
+      <View style={[styles.container, !device.SM && AppStyles.noDisplay]}>
         <HeaderContent />
       </View>
     </View>
@@ -29,8 +29,9 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
-    backgroundColor: Colors.Primary
+    flex: 1,
+    width: "100%",
+    maxWidth: Sizes.AppWidth,
   },
   logoTouch: {
     width: 80,

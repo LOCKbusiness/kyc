@@ -12,9 +12,19 @@ interface Props<T> {
   labelProp: string;
   title?: string;
   style?: StyleProp<ViewStyle>;
+  header?: boolean;
 }
 
-const DeFiDropdown = <T extends { [key: string]: any }>({ value, setValue, items, idProp, labelProp, title, style }: Props<T>) => {
+const DeFiDropdown = <T extends { [key: string]: any }>({
+  value,
+  setValue,
+  items,
+  idProp,
+  labelProp,
+  title,
+  style,
+  header,
+}: Props<T>) => {
   const [visible, setVisible] = useState(false);
 
   const itemSelected = (item: T) => {
@@ -26,7 +36,7 @@ const DeFiDropdown = <T extends { [key: string]: any }>({ value, setValue, items
     <>
       <Portal>
         <Dialog visible={visible} onDismiss={() => setVisible(false)} style={AppStyles.dialog}>
-          {title && <Dialog.Title style={{margin: 10}}>{title}</Dialog.Title>}
+          {title && <Dialog.Title style={{ margin: 10 }}>{title}</Dialog.Title>}
           <Dialog.ScrollArea style={styles.scrollArea}>
             <ScrollView style={styles.scrollView}>
               {items.map((item) => (
@@ -54,12 +64,13 @@ const DeFiDropdown = <T extends { [key: string]: any }>({ value, setValue, items
         contentStyle={styles.button}
         style={style}
         compact
+        header={header}
       >
         {value && value[labelProp]}
       </DeFiButton>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   scrollArea: {

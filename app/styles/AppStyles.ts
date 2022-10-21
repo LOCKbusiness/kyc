@@ -76,7 +76,7 @@ export default StyleSheet.create({
   halfWidth: {
     flex: 1,
     width: "50%",
-    margin: "auto"
+    margin: "auto",
   },
   center: {
     textAlign: "center",

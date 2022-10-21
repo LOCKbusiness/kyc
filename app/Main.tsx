@@ -26,7 +26,7 @@ const DrawerContent = () => {
           device.SM && AppStyles.noDisplay,
         ]}
       >
-        <HeaderContent />
+        <HeaderContent drawer />
       </View>
     </>
   );
@@ -67,19 +67,18 @@ const Main = () => {
           <Snackbar
             visible={snackVisible}
             onDismiss={() => setSnackVisible(false)}
-            action={{ label: "", icon: "close", color: Colors.Primary }}
+            action={{
+              label: "",
+              icon: "close",
+              color: snackContent?.level === Level.ERROR ? Colors.Error : Colors.Black,
+            }}
             duration={Snackbar.DURATION_MEDIUM}
             style={styles.snack}
             wrapperStyle={styles.snackWrapper}
           >
             <Paragraph
               style={{
-                color:
-                  snackContent?.level === Level.SUCCESS
-                    ? Colors.Success
-                    : snackContent?.level === Level.WARNING
-                    ? Colors.Yellow
-                    : Colors.Error,
+                color: snackContent?.level === Level.ERROR ? Colors.Error : Colors.Black,
               }}
             >
               {snackContent?.text}
@@ -88,13 +87,16 @@ const Main = () => {
         </Portal>
 
         <NavigationContainer linking={linking} ref={navigationRef}>
-          <drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={() => <DrawerContent />}>
+          <drawer.Navigator
+            screenOptions={{ headerShown: false, headerStyle: { backgroundColor: Colors.Primary } }}
+            drawerContent={() => <DrawerContent />}
+          >
             {screens.map((screen) => (
               <drawer.Screen
                 key={screen.route}
                 name={screen.route}
                 component={screen.screen}
-                options={{ unmountOnBlur: true }}
+                options={{ unmountOnBlur: true, headerTintColor: Colors.White }}
               />
             ))}
           </drawer.Navigator>
