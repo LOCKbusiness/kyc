@@ -10,8 +10,8 @@ AppTheme.colors = {
     text: Colors.Black,
     background: Colors.Grey100,
     placeholder: Colors.Grey400,
-    surface: Colors.Grey400,
-    onSurface: Colors.Grey400,
+    surface: Colors.Grey100,
+    onSurface: Colors.Grey100,
   },
 };
 AppTheme.fonts = {
