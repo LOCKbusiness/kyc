@@ -43,7 +43,7 @@
         "organization_name": "Nom de l'organisme"
       },
       "kyc": {
-        "request_business": "Veuillez télécharger l'extrait du registre du commerce de votre organisation.\nEnsuite, votre compte devra être vérifié avec le chatbot et l'identification en ligne.",
+        "request_business": "Veuillez télécharger l'extrait du registre du commerce de votre organisation.\nAprès cela, votre compte doit être vérifié avec une identification en ligne.",
         "status": "Statut KYC",
         "initiating": "La vérification est en préparation, cela peut prendre un certain temps. Nous vous prions de patienter."
       }

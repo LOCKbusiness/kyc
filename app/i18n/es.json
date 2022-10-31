@@ -43,7 +43,7 @@
         "organization_name": "Nombre de la organización"
       },
       "kyc": {
-        "request_business": "Por favor, cargue el extracto de su organización del registro mercantil.\nDespués, su cuenta debe ser verificada con el chatbot y la identificación en línea.",
+        "request_business": "Por favor, cargue el extracto de su organización del registro mercantil.\nDespués, su cuenta debe ser verificada con una identificación en línea.",
         "status": "Estado KYC (identificación personal)",
         "initiating": "La verificación está en preparación, puede llevar un tiempo. Le pedimos que tenga paciencia."
       }
