@@ -18,7 +18,6 @@ import { useDevice } from "../../hooks/useDevice";
 import { DeFiButton } from "../../elements/Buttons";
 import ButtonContainer from "../util/ButtonContainer";
 import { createRules } from "../../utils/Utils";
-import { ApiError } from "../../models/ApiDto";
 import { KycData } from "../../models/KycData";
 import Loading from "../util/Loading";
 import IconButton from "../../components/util/IconButton";
@@ -61,7 +60,7 @@ const KycDataEdit = ({ code, kycInfo, kycData, onChanged }: Props) => {
 
     putKycData(updatedData, code)
       .then((info) => onChanged(updatedData, info))
-      .catch((error: ApiError) => setError(error.statusCode === 409 ? "feedback.mail_error" : ""))
+      .catch(() => setError(""))
       .finally(() => setIsSaving(false));
   };
 

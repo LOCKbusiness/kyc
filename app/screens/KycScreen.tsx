@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AppLayout from "../components/AppLayout";
 import Iframe from "../components/util/Iframe";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import Routes from "../config/Routes";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { DeFiButton } from "../elements/Buttons";
@@ -11,7 +10,6 @@ import NotificationService from "../services/NotificationService";
 import {
   AccountType,
   getKycStatusString,
-  getTradeLimit,
   kycCompleted,
   kycInProgress,
   KycInfo,
@@ -19,7 +17,7 @@ import {
   KycStatus,
   kycNotStarted,
 } from "../models/User";
-import { pickDocuments, sleep } from "../utils/Utils";
+import { pickDocuments } from "../utils/Utils";
 import KycInit from "../components/KycInit";
 import { SpacerV } from "../elements/Spacers";
 import { H2 } from "../elements/Texts";
@@ -28,14 +26,11 @@ import withSettings from "../hocs/withSettings";
 import { DataTable, Dialog, Paragraph, Portal } from "react-native-paper";
 import { CompactRow, CompactCell } from "../elements/Tables";
 import ButtonContainer from "../components/util/ButtonContainer";
-import LimitEdit from "../components/edit/LimitEdit";
 import DeFiModal from "../components/util/DeFiModal";
-import ChatbotScreen from "./ChatbotScreen";
 import AppStyles from "../styles/AppStyles";
 import Colors from "../config/Colors";
 import { KycData } from "../models/KycData";
 import KycDataEdit from "../components/edit/KycDataEdit";
-import { ApiError } from "../models/ApiDto";
 
 const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   const { t } = useTranslation();
@@ -49,12 +44,10 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
 
   // UI state
   const [isLoading, setIsLoading] = useState(true);
-  const [isLimitRequest, setIsLimitRequest] = useState(false);
   const [isKycInProgress, setIsKycInProgress] = useState<boolean>(false);
   const [isKycDataEdit, setKycDataEdit] = useState<boolean>(false);
   const [showsKycStartDialog, setShowsKycStartDialog] = useState<boolean>(false);
   const [isFileUploading, setIsFileUploading] = useState(false);
-  const [showsLinkInstructions, setShowsLinkInstructions] = useState(false);
 
   useEffect(() => {
     // store and reset params
@@ -62,7 +55,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
     if (!params?.code) return onLoadFailed();
 
     setInputParams(params);
-    nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
+    // nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
 
     // get KYC info
     getKyc(params?.code)
@@ -79,8 +72,10 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
     if (!info?.kycDataComplete) {
       setKycData({ accountType: AccountType.PERSONAL, ...params });
       setKycDataEdit(true);
-    } else if (kycNotStarted(info?.kycStatus)) {
+    } else if (kycNotStarted(info?.kycStatus) && info?.accountType === AccountType.BUSINESS) {
       setShowsKycStartDialog(true);
+    } else if (kycNotStarted(info?.kycStatus)) {
+      startKyc();
     } else if (kycInProgress(info?.kycStatus)) {
       if (!info?.sessionUrl) return NotificationService.error(t("feedback.load_failed"));
       setIsKycInProgress(true);
@@ -90,8 +85,6 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
         setIsLoading(true);
         setTimeout(() => setIsLoading(false), 2000);
       }
-    } else if (kycCompleted(info?.kycStatus)) {
-      setIsLimitRequest(true);
     }
   };
 
@@ -109,39 +102,9 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
         setKycInfo(result);
         continueKyc(result);
       })
-      .catch((error: ApiError) => {
-        if (error.statusCode === 409) {
-          setShowsLinkInstructions(true);
-        } else {
-          onLoadFailed();
-        }
-      })
+      .catch(onLoadFailed)
       .finally(() => {
         setIsLoading(false);
-      });
-  };
-
-  const onChatBotFinished = (nthTry = 13): Promise<void> => {
-    setIsLoading(true);
-    return getKyc(kycInfo?.kycHash)
-      .then((info: KycInfo) => {
-        if (info.kycStatus === KycStatus.CHATBOT || !info.sessionUrl) {
-          // retry
-          if (nthTry > 1) {
-            return sleep(5).then(() => onChatBotFinished(nthTry - 1));
-          }
-
-          throw Error();
-        } else {
-          setKycInfo(info);
-          setIsLoading(false);
-
-          continueKyc(info);
-        }
-      })
-      .catch(() => {
-        setIsLoading(false);
-        NotificationService.error(t("model.kyc.chatbot_not_finished"));
       });
   };
 
@@ -173,8 +136,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   };
 
   const continueLabel = (): string => {
-    if (kycCompleted(kycInfo?.kycStatus)) return "model.kyc.increase_limit";
-    else if (kycNotStarted(kycInfo?.kycStatus)) return "action.start";
+    if (kycNotStarted(kycInfo?.kycStatus)) return "action.start";
     else return "action.next";
   };
 
@@ -186,15 +148,6 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
       removeHeaderSpace={kycInfo?.kycStatus === KycStatus.CHATBOT}
     >
       <KycInit isVisible={isLoading} setIsVisible={setIsLoading} />
-
-      <DeFiModal
-        isVisible={isLimitRequest}
-        setIsVisible={setIsLimitRequest}
-        title={t("model.kyc.increase_limit")}
-        style={{ width: 400 }}
-      >
-        <LimitEdit code={kycInfo?.kycHash} onSuccess={() => setIsLimitRequest(false)} />
-      </DeFiModal>
 
       {kycInfo?.kycHash && (
         <DeFiModal
@@ -215,13 +168,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
                 <Iframe src={kycInfo.setupUrl} />
               </View>
             )}
-            {kycInfo.kycStatus === KycStatus.CHATBOT ? (
-              <View style={styles.container}>
-                <ChatbotScreen sessionUrl={kycInfo.sessionUrl} onFinish={onChatBotFinished} />
-              </View>
-            ) : (
-              <Iframe src={kycInfo.sessionUrl} />
-            )}
+            <Iframe src={kycInfo.sessionUrl} />
           </View>
         ) : (
           <>
@@ -232,32 +179,15 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
                 style={AppStyles.dialog}
               >
                 <Dialog.Content>
-                  <Paragraph>
-                    {t(hasToUploadFounderDocument() ? "model.kyc.request_business" : "model.kyc.request")}
-                  </Paragraph>
+                  <Paragraph>{t("model.kyc.request_business")}</Paragraph>
                 </Dialog.Content>
                 <Dialog.Actions>
                   <DeFiButton onPress={() => setShowsKycStartDialog(false)} color={Colors.Primary}>
                     {t("action.abort")}
                   </DeFiButton>
                   <DeFiButton onPress={startKyc} loading={isFileUploading}>
-                    {t(hasToUploadFounderDocument() ? "action.upload" : "action.yes")}
+                    {t("action.upload")}
                   </DeFiButton>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
-
-            <Portal>
-              <Dialog
-                visible={showsLinkInstructions}
-                onDismiss={() => setShowsLinkInstructions(false)}
-                style={AppStyles.dialog}
-              >
-                <Dialog.Content>
-                  <Paragraph>{t("link.instructions")}</Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <DeFiButton onPress={() => setShowsLinkInstructions(false)}>{t("action.ok")}</DeFiButton>
                 </Dialog.Actions>
               </Dialog>
             </Portal>
@@ -274,10 +204,6 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
                     <CompactCell multiLine>{getKycStatusString(kycInfo)}</CompactCell>
                   </CompactRow>
                 )}
-                <CompactRow>
-                  <CompactCell title>{t("model.user.limit")}</CompactCell>
-                  <CompactCell>{getTradeLimit(kycInfo)}</CompactCell>
-                </CompactRow>
                 {kycInfo.blankedMail && (
                   <CompactRow>
                     <CompactCell title>{t("model.user.mail")}</CompactCell>
@@ -292,7 +218,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
                 )}
               </DataTable>
               <SpacerV height={20} />
-              {kycInfo.kycState !== KycState.REVIEW && (
+              {kycInfo.kycState !== KycState.REVIEW && !kycCompleted(kycInfo.kycStatus) && (
                 <ButtonContainer>
                   <DeFiButton mode="contained" onPress={() => continueKyc(kycInfo, inputParams)}>
                     {t(continueLabel())}

@@ -38,7 +38,7 @@ const Main = () => {
     prefixes: [],
     config: {
       screens: {
-        [Routes.Kyc]: "kyc",
+        [Routes.Kyc]: "",
         [Routes.NotFound]: "*",
       },
     },
