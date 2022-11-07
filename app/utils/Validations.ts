@@ -22,15 +22,6 @@ class ValidationsClass {
     };
   }
 
-  public get Ref() {
-    return {
-      pattern: {
-        value: /^\w{3}-\w{3}$/,
-        message: i18n.t("validation.pattern_invalid"),
-      },
-    };
-  }
-
   public get Phone() {
     return this.Custom((number: string) => {
       const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
@@ -45,15 +36,6 @@ class ValidationsClass {
 
       return true;
     });
-  }
-
-  public get Address() {
-    return {
-      pattern: {
-        value: Environment.addressFormat,
-        message: i18n.t("validation.pattern_invalid"),
-      },
-    };
   }
 
   public Custom = (validator: (value: any) => true | string) => ({

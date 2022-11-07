@@ -25,12 +25,18 @@ export enum AccountType {
   SOLE_PROPRIETORSHIP = "SoleProprietorship",
 }
 
+export enum TradingPeriod {
+  DAY = "Day",
+  YEAR = "Year",
+}
+
 export interface KycInfo {
   kycStatus: KycStatus;
   kycState: KycState;
   kycDataComplete: boolean;
   kycHash: string;
   accountType: AccountType;
+  tradingLimit: { limit: number; period: TradingPeriod };
   depositLimit: number;
   sessionUrl?: string;
   setupUrl?: string;
