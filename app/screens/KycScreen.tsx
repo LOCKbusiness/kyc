@@ -53,7 +53,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   useEffect(() => {
     // store and reset params
     const params = route.params as any;
-    if (!params?.code) return onLoadFailed();
+    if (!params?.code) return onError();
 
     setInputParams(params);
     nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
@@ -66,7 +66,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
 
         if (params?.autostart) continueKyc(result, params);
       })
-      .catch(onLoadFailed);
+      .catch(onError);
   }, []);
 
   const continueKyc = (info?: KycInfo, params?: any) => {
@@ -111,6 +111,10 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
 
   const onLoadFailed = () => {
     NotificationService.error(t("feedback.load_failed"));
+  };
+
+  const onError = () => {
+    nav.navigate(Routes.NotFound);
   };
 
   const onKycDataSubmit = (newKycData: KycData, info: KycInfo) => {
