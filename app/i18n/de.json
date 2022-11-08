@@ -23,6 +23,7 @@
     "model": {
       "user": {
         "edit": "Benutzerdaten bearbeiten",
+        "kyc_data": "Identifikationsdaten",
         "contact_data": "Kontaktdaten",
         "account_type": "Kontotyp",
         "personal": "Privatkonto",
@@ -45,6 +46,17 @@
       "kyc": {
         "request_business": "Bitte lade den Handelsregisterauszug deiner Organisation hoch.\nDanach muss dein Konto mit Online Identifikation verifiziert werden.",
         "status": "KYC Status",
+        "chatbot": "Chatbot Onboarding",
+        "onlineid": "Online Identifikation",
+        "videoid": "Video Identifikation",
+        "check": "Daten werden geprüft",
+        "manual": "Verifizierung abgeschlossen",
+        "completed": "Verifizierung abgeschlossen",
+        "rejected": "Verifizierung abgelehnt",
+        "na": "In Bearbeitung",
+        "reminded": "In Bearbeitung",
+        "failed": "Fehlgeschlagen",
+        "review": "Wird geprüft",
         "initiating": "Die Verifizierung ist in Vorbereitung, es kann eine Weile dauern. Wir bitten um Geduld."
       }
     }

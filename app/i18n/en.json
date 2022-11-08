@@ -23,6 +23,7 @@
     "model": {
       "user": {
         "edit": "Edit user data",
+        "kyc_data": "Identification data",
         "contact_data": "Contact data",
         "account_type": "Account type",
         "personal": "Personal account",
@@ -45,6 +46,17 @@
       "kyc": {
         "request_business": "Please upload your organization's certificate of incorporation.\nAfter that, your account must be verified with online identification.",
         "status": "KYC status",
+        "chatbot": "chatbot onboarding",
+        "onlineid": "online identification",
+        "videoid": "video identification",
+        "check": "Data in review",
+        "manual": "Verification completed",
+        "completed": "Verification completed",
+        "rejected": "Verification rejected",
+        "na": "In progress",
+        "reminded": "In progress",
+        "failed": "Failed",
+        "review": "In review",
         "initiating": "Verification is in preparation, it may take a while. We ask for patience."
       }
     }

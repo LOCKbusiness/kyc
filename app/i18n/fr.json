@@ -23,6 +23,7 @@
     "model": {
       "user": {
         "edit": "Modifier les données personnelles",
+        "kyc_data": "Données d'identification",
         "contact_data": "Coordonnées",
         "account_type": "Type de compte",
         "personal": "Compte privé",
@@ -45,6 +46,17 @@
       "kyc": {
         "request_business": "Veuillez télécharger l'extrait du registre du commerce de votre organisation.\nAprès cela, votre compte doit être vérifié avec une identification en ligne.",
         "status": "Statut KYC",
+        "chatbot": "chatbot",
+        "onlineid": "identification en ligne",
+        "videoid": "identification en vidéo",
+        "check": "Données en cours de révision",
+        "manual": "Vérification terminée",
+        "completed": "Vérification terminée",
+        "rejected": "Vérification refusée",
+        "na": "En cours",
+        "reminded": "En cours",
+        "failed": "Échoué",
+        "review": "En révision",
         "initiating": "La vérification est en préparation, cela peut prendre un certain temps. Nous vous prions de patienter."
       }
     }

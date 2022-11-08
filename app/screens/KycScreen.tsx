@@ -31,6 +31,7 @@ import AppStyles from "../styles/AppStyles";
 import Colors from "../config/Colors";
 import { KycData } from "../models/KycData";
 import KycDataEdit from "../components/edit/KycDataEdit";
+import Routes from "../config/Routes";
 
 const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
     if (!params?.code) return onLoadFailed();
 
     setInputParams(params);
-    // nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
+    nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
 
     // get KYC info
     getKyc(params?.code)

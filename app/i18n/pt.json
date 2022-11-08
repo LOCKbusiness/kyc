@@ -23,6 +23,7 @@
     "model": {
       "user": {
         "edit": "Editar dados do utilizador",
+        "kyc_data": "Dados de identificação",
         "contact_data": "Dados de contacto",
         "account_type": "Tipo de conta",
         "personal": "Conta privada",
@@ -45,6 +46,17 @@
       "kyc": {
         "request_business": "Por favor, carregue o extracto do registo comercial da sua organização.\nDepois disso, a sua conta deve ser verificada com identificação em linha.",
         "status": "KYC Status",
+        "chatbot": "chatbot onboarding",
+        "onlineid": "identificação online",
+        "videoid": "identificação vídeo",
+        "check": "Dados em revisão",
+        "manual": "Verificação concluída",
+        "completed": "Verificação concluída",
+        "rejected": "Verificação rejeitada",
+        "na": "Em curso",
+        "reminded": "Em curso",
+        "failed": "Falha",
+        "review": "Em Revista",
         "initiating": "A verificação está em preparação, pode demorar algum tempo. Pedimos a vossa paciência."
       }
     }

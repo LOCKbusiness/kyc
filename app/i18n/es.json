@@ -23,6 +23,7 @@
     "model": {
       "user": {
         "edit": "Edita la información del usuario",
+        "kyc_data": "Datos de identificación",
         "contact_data": "Datos de contacto",
         "account_type": "Tipo de cuenta",
         "personal": "Cuenta personal",
@@ -45,6 +46,17 @@
       "kyc": {
         "request_business": "Por favor, cargue el extracto de su organización del registro mercantil.\nDespués, su cuenta debe ser verificada con una identificación en línea.",
         "status": "Estado KYC (identificación personal)",
+        "chatbot": "conectando con el chatbot",
+        "onlineid": "identificación online",
+        "videoid": "identificación por video",
+        "check": "Datos en revisión",
+        "manual": "Verificación completada",
+        "completed": "Verificación completada",
+        "rejected": "Verificación rechazada",
+        "na": "En progreso",
+        "reminded": "En progreso",
+        "failed": "Fallido",
+        "review": "En revisión",
         "initiating": "La verificación está en preparación, puede llevar un tiempo. Le pedimos que tenga paciencia."
       }
     }
