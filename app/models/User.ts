@@ -36,8 +36,6 @@ export interface KycInfo {
   kycDataComplete: boolean;
   kycHash: string;
   accountType: AccountType;
-  tradingLimit: { limit: number; period: TradingPeriod };
-  depositLimit: number;
   sessionUrl?: string;
   setupUrl?: string;
   blankedPhone?: string;
@@ -59,13 +57,5 @@ export const getKycStatusString = (user: KycInfo): string => {
     )})`;
   } else {
     return i18n.t(`model.kyc.${user.kycStatus.toLowerCase()}`);
-  }
-};
-
-export const getTradeLimit = (user: KycInfo): string => {
-  if (kycCompleted(user.kycStatus)) {
-    return `${formatAmount(user.depositLimit)} € ${i18n.t("model.user.per_year")}`;
-  } else {
-    return `${formatAmount(user.kycStatus === KycStatus.REJECTED ? 0 : 900)} € ${i18n.t("model.user.per_day")}`;
   }
 };
