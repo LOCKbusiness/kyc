@@ -44,6 +44,7 @@
         "organization_name": "Nome da organização"
       },
       "kyc": {
+        "title": "LOCK KYC",
         "request_business": "Por favor, carregue o extracto do registo comercial da sua organização.\nDepois disso, a sua conta deve ser verificada com identificação em linha.",
         "status": "KYC Status",
         "chatbot": "chatbot onboarding",

@@ -196,7 +196,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
             <View>
               {!settings?.isIframe && <SpacerV height={30} />}
 
-              <H2 text={t("model.kyc.status")} style={styles.tableHeader} />
+              <H2 text={t("model.kyc.title")} style={styles.tableHeader} />
               <SpacerV />
               <DataTable>
                 {!kycNotStarted(kycInfo.kycStatus) && (

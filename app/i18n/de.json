@@ -44,6 +44,7 @@
         "organization_name": "Name der Organisation"
       },
       "kyc": {
+        "title": "LOCK KYC",
         "request_business": "Bitte lade den Handelsregisterauszug deiner Organisation hoch.\nDanach muss dein Konto mit Online Identifikation verifiziert werden.",
         "status": "KYC Status",
         "chatbot": "Chatbot Onboarding",
