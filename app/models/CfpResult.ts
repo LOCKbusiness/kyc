@@ -4,8 +4,8 @@ export enum ResultStatus {
 }
 
 export enum VotingType {
-  CFP = 'cfp',
-  DFIP = 'dfip',
+  CFP = "cfp",
+  DFIP = "dfip",
 }
 
 interface Vote {

@@ -26,23 +26,23 @@ import Routes from "../config/Routes";
 const CfpScreen = () => {
   const route = useRoute();
   const nav = useNavigation();
-  
+
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [cfpResults, setCfpResults] = useState<CfpResult[]>();
-  const [token,setToken] = useState();
+  const [token, setToken] = useState();
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [votes, setVotes] = useState<CfpVotes | undefined>();
   const [isSaving, setIsSaving] = useState<{ number: Number; vote: CfpVote } | undefined>();
 
   useEffect(() => {
-
     // store and reset params
     const params = route.params as any;
     if (!params?.token) return nav.navigate(Routes.NotFound);
- 
+
     setToken(params.token);
     nav.navigate(Routes.Cfp, { token: undefined });
+
     Promise.all([getCfpResults("latest"), getVotes(params.token)])
       .then(([results, votes]) => {
         setCfpResults(results);
@@ -53,13 +53,15 @@ const CfpScreen = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const votingOpen= (results:CfpResult[]): boolean=> {
-    if(results.length==0) return false;
-    const startDate =new Date(results[0].startDate);
-        const endDate = new Date(results[0].endDate);
-        endDate.setDate(endDate.getDate()-1)
-        return (new Date() > startDate && new Date() < endDate)
-  }
+  const votingOpen = (results: CfpResult[]): boolean => {
+    if (results.length == 0) return false;
+
+    const startDate = new Date(results[0].startDate);
+    const endDate = new Date(results[0].endDate);
+    endDate.setDate(endDate.getDate() - 1);
+
+    return new Date() > startDate && new Date() < endDate;
+  };
 
   const getData = (result: CfpResult): StackedBarChartData => {
     return {
@@ -79,13 +81,13 @@ const CfpScreen = () => {
   };
 
   const onVote = (number: number, vote: CfpVote) => {
-    
-    if(!token) return;
+    if (!token) return;
+
     setVotes((votes) => {
       votes = { ...(votes ?? {}), [number]: votes?.[number] === vote ? undefined : vote };
 
       setIsSaving({ number, vote });
-      putVotes(votes,token).finally(() => setIsSaving(undefined));
+      putVotes(votes, token).finally(() => setIsSaving(undefined));
 
       return votes;
     });
@@ -113,7 +115,6 @@ const CfpScreen = () => {
           <Loading size="large" />
         ) : (
           <>
-
             {cfpResults
               ?.sort((a, b) => a.number - b.number)
               .map((result) => (
@@ -165,31 +166,31 @@ const CfpScreen = () => {
                       </View>
                     )}
                   </View>
-                      <SpacerV />
-                      <Text style={[AppStyles.center, AppStyles.b]}>{t("cfp.your_vote")}</Text>
-                      <View style={[AppStyles.containerHorizontalWrap, styles.voteContainer]}>
-                        <RadioButton
-                          label={t("cfp.yes")}
-                          onPress={() => onVote(result.number, CfpVote.YES)}
-                          checked={votes?.[result.number] === CfpVote.YES}
-                          disabled={!isVotingOpen}
-                          loading={isSaving?.number === result.number && isSaving.vote === CfpVote.YES}
-                        />
-                        <RadioButton
-                          label={t("cfp.no")}
-                          onPress={() => onVote(result.number, CfpVote.NO)}
-                          checked={votes?.[result.number] === CfpVote.NO}
-                          disabled={!isVotingOpen}
-                          loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
-                        />
-                        <RadioButton
-                          label={t("cfp.neutral")}
-                          onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
-                          checked={votes?.[result.number] === CfpVote.NEUTRAL}
-                          disabled={!isVotingOpen}
-                          loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
-                        />
-                      </View>
+                  <SpacerV />
+                  <Text style={[AppStyles.center, AppStyles.b]}>{t("cfp.your_vote")}</Text>
+                  <View style={[AppStyles.containerHorizontalWrap, styles.voteContainer]}>
+                    <RadioButton
+                      label={t("cfp.yes")}
+                      onPress={() => onVote(result.number, CfpVote.YES)}
+                      checked={votes?.[result.number] === CfpVote.YES}
+                      disabled={!isVotingOpen}
+                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.YES}
+                    />
+                    <RadioButton
+                      label={t("cfp.no")}
+                      onPress={() => onVote(result.number, CfpVote.NO)}
+                      checked={votes?.[result.number] === CfpVote.NO}
+                      disabled={!isVotingOpen}
+                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
+                    />
+                    <RadioButton
+                      label={t("cfp.neutral")}
+                      onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
+                      checked={votes?.[result.number] === CfpVote.NEUTRAL}
+                      disabled={!isVotingOpen}
+                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
+                    />
+                  </View>
                   <SpacerV height={50} />
                 </View>
               ))}
