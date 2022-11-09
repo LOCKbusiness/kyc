@@ -45,13 +45,6 @@ const CfpScreen = () => {
     nav.navigate(Routes.Cfp, { token: undefined });
     Promise.all([getCfpResults("latest"), getVotes(params.token)])
       .then(([results, votes]) => {
-
-        results[results.length-1].totalVotes={ "total": 418,
-        "possible": 10791,
-        "turnout": 3.87,
-        "yes": 204,
-        "neutral": 10,
-        "no": 204}
         setCfpResults(results);
         setIsVotingOpen(votingOpen(results));
         setVotes(votes);
