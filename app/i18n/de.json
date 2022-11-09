@@ -59,6 +59,22 @@
         "review": "Wird geprüft",
         "initiating": "Die Verifizierung ist in Vorbereitung, es kann eine Weile dauern. Wir bitten um Geduld."
       }
-    }
+    },
+    "cfp": {
+      "link": "CFP",
+      "title": "Aktuelle DeFiChain CFPs",
+      "all": "Alle CFPs",
+      "yes": "Ja",
+      "neutral": "Neutral",
+      "no": "Nein",
+      "votes": "Stimmen",
+      "voting": "Abstimmung",
+      "vote_turnout": "Stimmbeteiligung",
+      "current_result": "Aktuelles Resultat",
+      "approved": "Angenommen",
+      "not approved": "Nicht angenommen",
+      "read_proposal": "Proposal lesen",
+      "your_vote": "Deine Stimme"
+  }
   }
 }

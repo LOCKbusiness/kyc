@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { DeFiButton } from "../elements/Buttons";
-import { getKyc, postFounderCertificate, postKyc } from "../services/ApiService";
+import { getKyc, postFounderCertificate, postKyc } from "../services/KycApiService";
 import NotificationService from "../services/NotificationService";
 import {
   AccountType,
