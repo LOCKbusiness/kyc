@@ -1,7 +1,6 @@
 import { Environment } from "../env/Environment";
 import { ApiError } from "../models/ApiDto";
 import { KycInfo } from "../models/User";
-import { LimitRequest } from "../models/LimitRequest";
 import { KycData, toKycDataDto } from "../models/KycData";
 import { Language } from "../models/Language";
 import { Country } from "../models/Country";
@@ -24,10 +23,6 @@ export const postKyc = (code?: string): Promise<KycInfo> => {
 
 export const getKyc = (code?: string): Promise<KycInfo> => {
   return fetchFrom<KycInfo>(`${KycUrl}/${code}`);
-};
-
-export const postLimit = (request: LimitRequest, code?: string): Promise<LimitRequest> => {
-  return fetchFrom<LimitRequest>(`${KycUrl}/${code}/limit`, "POST", request);
 };
 
 export const postFounderCertificate = (files: File[], code?: string): Promise<void> => {
