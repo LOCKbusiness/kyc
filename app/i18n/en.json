@@ -44,6 +44,7 @@
         "organization_name": "Organization name"
       },
       "kyc": {
+        "title": "LOCK KYC",
         "request_business": "Please upload your organization's certificate of incorporation.\nAfter that, your account must be verified with online identification.",
         "status": "KYC status",
         "chatbot": "chatbot onboarding",

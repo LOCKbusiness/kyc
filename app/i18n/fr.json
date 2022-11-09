@@ -44,6 +44,7 @@
         "organization_name": "Nom de l'organisme"
       },
       "kyc": {
+        "title": "LOCK KYC",
         "request_business": "Veuillez télécharger l'extrait du registre du commerce de votre organisation.\nAprès cela, votre compte doit être vérifié avec une identification en ligne.",
         "status": "Statut KYC",
         "chatbot": "chatbot",
