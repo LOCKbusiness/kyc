@@ -1,0 +1,65 @@
+{
+  "common": {
+    "general": {
+      "homepage": "Homepage",
+      "telegram": "Telegram",
+      "telegram_link": "https://t.me/LOCK_Staking",
+      "select_language": "Select language"
+    },
+    "action": {
+      "save": "Save",
+      "abort": "Cancel",
+      "next": "Next",
+      "upload": "Upload",
+      "start": "Start",
+      "search": "Search"
+    },
+    "feedback": {
+      "page_not_found": "Page not found!",
+      "load_failed": "Error loading the data!",
+      "save_failed": "Error while saving!",
+      "file_error": "Error reading the file!"
+    },
+    "model": {
+      "user": {
+        "edit": "Edit user data",
+        "kyc_data": "Identification data",
+        "contact_data": "Contact data",
+        "account_type": "Account type",
+        "personal": "Personal account",
+        "business": "Business account",
+        "soleproprietorship": "Sole proprietorship",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "street": "Street",
+        "house_number": "House number",
+        "home": "Address",
+        "zip": "ZIP Code",
+        "location": "Location",
+        "country": "Country",
+        "mail": "E-mail address",
+        "mobile_number": "Mobile number",
+        "personal_info": "Personal information",
+        "organization_info": "Organization",
+        "organization_name": "Organization name"
+      },
+      "kyc": {
+        "title": "LOCK KYC",
+        "request_business": "Please upload your organization's certificate of incorporation.\nAfter that, your account must be verified with online identification.",
+        "status": "KYC status",
+        "chatbot": "chatbot onboarding",
+        "onlineid": "online identification",
+        "videoid": "video identification",
+        "check": "Data in review",
+        "manual": "Verification completed",
+        "completed": "Verification completed",
+        "rejected": "Verification rejected",
+        "na": "In progress",
+        "reminded": "In progress",
+        "failed": "Failed",
+        "review": "In review",
+        "initiating": "Verification is in preparation, it may take a while. We ask for patience."
+      }
+    }
+  }
+}

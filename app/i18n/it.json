@@ -1,0 +1,65 @@
+{
+  "common": {
+    "general": {
+      "homepage": "Homepage",
+      "telegram": "Telegram",
+      "telegram_link": "https://t.me/LOCK_Staking",
+      "select_language": "Selezionare la lingua"
+    },
+    "action": {
+      "save": "Salva",
+      "abort": "Annulla",
+      "next": "Prossimo",
+      "upload": "Carica",
+      "start": "Inizia",
+      "search": "Ricerca"
+    },
+    "feedback": {
+      "page_not_found": "Pagina non trovata!",
+      "load_failed": "Errore durante il caricamento dei dati!",
+      "save_failed": "Errore durante il salvataggio!",
+      "file_error": "Errore nella lettura del file!"
+    },
+    "model": {
+      "user": {
+        "edit": "Modificare i dati dell'utente",
+        "kyc_data": "Dati di identificazione",
+        "contact_data": "Dati di contatto",
+        "account_type": "Tipo di conto",
+        "personal": "Conto privato",
+        "business": "Conto commerciale",
+        "soleproprietorship": "Impresa individuale",
+        "first_name": "Nome",
+        "last_name": "Cognome",
+        "street": "Via",
+        "house_number": "Numero civico",
+        "home": "Indirizzo",
+        "zip": "CAP",
+        "location": "Località",
+        "country": "Paese",
+        "mail": "Indirizzo e-mail",
+        "mobile_number": "Numero di cellulare",
+        "personal_info": "Informazioni personali",
+        "organization_info": "Organizzazione",
+        "organization_name": "Nome dell'organizzazione"
+      },
+      "kyc": {
+        "title": "LOCK KYC",
+        "request_business": "Si prega di caricare l'estratto del registro commerciale della vostra organizzazione.\nSuccessivamente, il conto deve essere verificato con un'identificazione online.",
+        "status": "Stato del KYC",
+        "chatbot": "chatbot",
+        "onlineid": "identificazione online",
+        "videoid": "identificazione video",
+        "check": "Dati in revisione",
+        "manual": "Verifica completata",
+        "completed": "Verifica completata",
+        "rejected": "Verifica rifiutata",
+        "na": "In corso",
+        "reminded": "In corso",
+        "failed": "Fallito",
+        "review": "In revisione",
+        "initiating": "La verifica è in preparazione, potrebbe volerci un po' di tempo. Ti chiediamo pazienza"
+      }
+    }
+  }
+}

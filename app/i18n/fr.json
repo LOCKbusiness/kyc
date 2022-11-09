@@ -1,0 +1,65 @@
+{
+  "common": {
+    "general": {
+      "homepage": "Accueil",
+      "telegram": "Telegram",
+      "telegram_link": "https://t.me/LOCK_Staking",
+      "select_language": "Sélectionner la langue"
+    },
+    "action": {
+      "save": "Enregistrer",
+      "abort": "Annuler",
+      "next": "Suivant",
+      "upload": "Télécharger",
+      "start": "Start",
+      "search": "Recherche"
+    },
+    "feedback": {
+      "page_not_found": "Page non trouvée !",
+      "load_failed": "Erreur lors du chargement des données !",
+      "save_failed": "Erreur lors de la sauvegarde !",
+      "file_error": "Erreur de lecture du fichier !"
+    },
+    "model": {
+      "user": {
+        "edit": "Modifier les données personnelles",
+        "kyc_data": "Données d'identification",
+        "contact_data": "Coordonnées",
+        "account_type": "Type de compte",
+        "personal": "Compte privé",
+        "business": "Compte professionnel",
+        "soleproprietorship": "Travailleur indépendant",
+        "first_name": "Prénom",
+        "last_name": "Nom de famille",
+        "street": "Rue",
+        "house_number": "Numéro",
+        "home": "Adresse",
+        "zip": "Code postal",
+        "location": "Ville",
+        "country": "Pays",
+        "mail": "Adresse e-mail",
+        "mobile_number": "Numéro de téléphone mobile",
+        "personal_info": "Informations personnelles",
+        "organization_info": "Organisme",
+        "organization_name": "Nom de l'organisme"
+      },
+      "kyc": {
+        "title": "LOCK KYC",
+        "request_business": "Veuillez télécharger l'extrait du registre du commerce de votre organisation.\nAprès cela, votre compte doit être vérifié avec une identification en ligne.",
+        "status": "Statut KYC",
+        "chatbot": "chatbot",
+        "onlineid": "identification en ligne",
+        "videoid": "identification en vidéo",
+        "check": "Données en cours de révision",
+        "manual": "Vérification terminée",
+        "completed": "Vérification terminée",
+        "rejected": "Vérification refusée",
+        "na": "En cours",
+        "reminded": "En cours",
+        "failed": "Échoué",
+        "review": "En révision",
+        "initiating": "La vérification est en préparation, cela peut prendre un certain temps. Nous vous prions de patienter."
+      }
+    }
+  }
+}

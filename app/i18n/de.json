@@ -1,0 +1,65 @@
+{
+  "common": {
+    "general": {
+      "homepage": "Homepage",
+      "telegram": "Telegram",
+      "telegram_link": "https://t.me/LOCK_Staking",
+      "select_language": "Sprache auswählen"
+    },
+    "action": {
+      "save": "Speichern",
+      "abort": "Abbrechen",
+      "next": "Weiter",
+      "upload": "Hochladen",
+      "start": "Start",
+      "search": "Suche"
+    },
+    "feedback": {
+      "page_not_found": "Seite nicht gefunden!",
+      "load_failed": "Fehler beim Laden der Daten!",
+      "save_failed": "Fehler beim Speichern!",
+      "file_error": "Fehler beim Lesen der Datei!"
+    },
+    "model": {
+      "user": {
+        "edit": "Benutzerdaten bearbeiten",
+        "kyc_data": "Identifikationsdaten",
+        "contact_data": "Kontaktdaten",
+        "account_type": "Kontotyp",
+        "personal": "Privatkonto",
+        "business": "Geschäftskonto",
+        "soleproprietorship": "Einzelunternehmen",
+        "first_name": "Vorname",
+        "last_name": "Nachname",
+        "street": "Strasse",
+        "house_number": "Hausnummer",
+        "home": "Adresse",
+        "zip": "PLZ",
+        "location": "Ort",
+        "country": "Land",
+        "mail": "E-Mail Adresse",
+        "mobile_number": "Handynummer",
+        "personal_info": "Persönliche Informationen",
+        "organization_info": "Organisation",
+        "organization_name": "Name der Organisation"
+      },
+      "kyc": {
+        "title": "LOCK KYC",
+        "request_business": "Bitte lade den Handelsregisterauszug deiner Organisation hoch.\nDanach muss dein Konto mit Online Identifikation verifiziert werden.",
+        "status": "KYC Status",
+        "chatbot": "Chatbot Onboarding",
+        "onlineid": "Online Identifikation",
+        "videoid": "Video Identifikation",
+        "check": "Daten werden geprüft",
+        "manual": "Verifizierung abgeschlossen",
+        "completed": "Verifizierung abgeschlossen",
+        "rejected": "Verifizierung abgelehnt",
+        "na": "In Bearbeitung",
+        "reminded": "In Bearbeitung",
+        "failed": "Fehlgeschlagen",
+        "review": "Wird geprüft",
+        "initiating": "Die Verifizierung ist in Vorbereitung, es kann eine Weile dauern. Wir bitten um Geduld."
+      }
+    }
+  }
+}

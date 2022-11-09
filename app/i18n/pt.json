@@ -1,0 +1,65 @@
+{
+  "common": {
+    "general": {
+      "homepage": "Página inicial",
+      "telegram": "Telegram",
+      "telegram_link": "https://t.me/LOCK_Staking",
+      "select_language": "Seleccionar idioma"
+    },
+    "action": {
+      "save": "Guardar",
+      "abort": "Cancelar",
+      "next": "Próximo",
+      "upload": "Carregar",
+      "start": "Início",
+      "search": "Pesquisa"
+    },
+    "feedback": {
+      "page_not_found": "Página não encontrada!",
+      "load_failed": "Erro ao carregar os dados!",
+      "save_failed": "Erro ao guardar!",
+      "file_error": "Erro na leitura do ficheiro!"
+    },
+    "model": {
+      "user": {
+        "edit": "Editar dados do utilizador",
+        "kyc_data": "Dados de identificação",
+        "contact_data": "Dados de contacto",
+        "account_type": "Tipo de conta",
+        "personal": "Conta privada",
+        "business": "Conta comercial",
+        "soleproprietorship": "Conto comerciante único",
+        "first_name": "Primeiro nome",
+        "last_name": "Sobrenome",
+        "street": "Rua",
+        "house_number": "Número da casa",
+        "home": "Endereço",
+        "zip": "Código postal",
+        "location": "Localização",
+        "country": "País",
+        "mail": "Endereço de e-mail",
+        "mobile_number": "Número de telemóvel",
+        "personal_info": "Informação pessoal",
+        "organization_info": "Organização",
+        "organization_name": "Nome da organização"
+      },
+      "kyc": {
+        "title": "LOCK KYC",
+        "request_business": "Por favor, carregue o extracto do registo comercial da sua organização.\nDepois disso, a sua conta deve ser verificada com identificação em linha.",
+        "status": "KYC Status",
+        "chatbot": "chatbot onboarding",
+        "onlineid": "identificação online",
+        "videoid": "identificação vídeo",
+        "check": "Dados em revisão",
+        "manual": "Verificação concluída",
+        "completed": "Verificação concluída",
+        "rejected": "Verificação rejeitada",
+        "na": "Em curso",
+        "reminded": "Em curso",
+        "failed": "Falha",
+        "review": "Em Revista",
+        "initiating": "A verificação está em preparação, pode demorar algum tempo. Pedimos a vossa paciência."
+      }
+    }
+  }
+}
