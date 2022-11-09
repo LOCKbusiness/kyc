@@ -51,15 +51,6 @@ export enum CfpVote {
   NEUTRAL = "Neutral",
 }
 
-export enum WalletRole {
-  Unknown = "Unknown",
-  User = "User",
-  Admin = "Admin",
-  EMPLOYEE = "Employee",
-  VIP = "VIP",
-  BETA = "Beta",
-}
-
 export const kycNotStarted = (kycStatus?: KycStatus) => [KycStatus.NA].includes(kycStatus ?? KycStatus.NA);
 
 export const kycCompleted = (kycStatus?: KycStatus) =>
