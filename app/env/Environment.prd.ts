@@ -1,6 +1,7 @@
 export const Environment = {
-  defaultLanguage: "DE",
+  defaultLanguage: "EN",
   api: {
     baseUrl: "https://api.dfx.swiss/v1",
+    lockUrl: "https://api.lock.space/v1",
   },
 };

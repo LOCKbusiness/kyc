@@ -3,7 +3,7 @@ import { first } from "rxjs/operators";
 import { Environment } from "../env/Environment";
 import i18n from "../i18n/i18n";
 import { Language } from "../models/Language";
-import { getLanguages } from "./ApiService";
+import { getLanguages } from "./KycApiService";
 import NotificationService from "./NotificationService";
 import StorageService from "./StorageService";
 import Moment from "moment";
@@ -33,7 +33,9 @@ class SettingsServiceClass {
     getLanguages()
       .then((languages) => (this.Languages = languages.filter((l) => l.enable)))
       .then(() => this.Settings)
-      .then((settings) => this.Languages.find((l) => l.symbol == settings.language)?.symbol ?? Environment.defaultLanguage)
+      .then(
+        (settings) => this.Languages.find((l) => l.symbol == settings.language)?.symbol ?? Environment.defaultLanguage
+      )
       .then((currentLanguage) => this.updateSettings({ language: currentLanguage }))
       .catch(() => NotificationService.error(i18n.t("feedback.load_failed")));
   }
@@ -43,8 +45,7 @@ class SettingsServiceClass {
   }
 
   public get Settings(): Promise<AppSettings> {
-    return StorageService.getValue<AppSettings>(SettingsKey)
-      .then((settings) => ({ ...DefaultSettings, ...settings }));
+    return StorageService.getValue<AppSettings>(SettingsKey).then((settings) => ({ ...DefaultSettings, ...settings }));
   }
 
   public get Language(): Promise<Language | undefined> {

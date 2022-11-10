@@ -60,6 +60,22 @@
         "review": "In review",
         "initiating": "Verification is in preparation, it may take a while. We ask for patience."
       }
+    },
+    "cfp": {
+      "link": "CFP",
+      "title": "Current DeFiChain CFPs",
+      "all": "All CFPs",
+      "yes": "Yes",
+      "neutral": "Neutral",
+      "no": "No",
+      "votes": "Votes",
+      "voting": "Voting",
+      "vote_turnout": "Vote turnout",
+      "current_result": "Current result",
+      "approved": "Approved",
+      "not approved": "Not approved",
+      "read_proposal": "Read proposal",
+      "your_vote": "Your vote"
     }
   }
 }

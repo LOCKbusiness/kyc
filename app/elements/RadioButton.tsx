@@ -20,7 +20,7 @@ export const RadioButton = ({ label, onPress, checked, disabled, loading }: Radi
           {loading ? (
             <Loading size={20} style={{ marginRight: 16 }} />
           ) : (
-            <PaperRadioButton value="dfx" status={checked ? "checked" : "unchecked"} disabled={disabled} />
+            <PaperRadioButton value="lock" status={checked ? "checked" : "unchecked"} disabled={disabled} />
           )}
         </View>
         <Paragraph>{label}</Paragraph>

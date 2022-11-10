@@ -41,6 +41,16 @@ export interface KycInfo {
   blankedMail?: string;
 }
 
+export interface CfpVotes {
+  [number: number]: CfpVote | undefined;
+}
+
+export enum CfpVote {
+  YES = "Yes",
+  NO = "No",
+  NEUTRAL = "Neutral",
+}
+
 export const kycNotStarted = (kycStatus?: KycStatus) => [KycStatus.NA].includes(kycStatus ?? KycStatus.NA);
 
 export const kycCompleted = (kycStatus?: KycStatus) =>

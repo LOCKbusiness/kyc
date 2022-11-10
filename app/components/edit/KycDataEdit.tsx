@@ -5,7 +5,7 @@ import { StyleSheet, View } from "react-native";
 import { SpacerH, SpacerV } from "../../elements/Spacers";
 import { Country } from "../../models/Country";
 import { AccountType, KycInfo } from "../../models/User";
-import { getCountries, putKycData } from "../../services/ApiService";
+import { getCountries, putKycData } from "../../services/KycApiService";
 import AppStyles from "../../styles/AppStyles";
 import DeFiPicker from "../form/DeFiPicker";
 import Form from "../form/Form";

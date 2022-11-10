@@ -15,6 +15,7 @@ import AppStyles from "./styles/AppStyles";
 import Colors from "./config/Colors";
 import KycScreen from "./screens/KycScreen";
 import NotFoundScreen from "./screens/NotFoundScreen";
+import CfpScreen from "./screens/CfpScreen";
 
 const DrawerContent = () => {
   const device = useDevice();
@@ -40,12 +41,14 @@ const Main = () => {
       screens: {
         [Routes.Kyc]: "",
         [Routes.NotFound]: "*",
+        [Routes.Cfp]: "cfp",
       },
     },
   };
   const screens = [
     { route: Routes.Kyc, screen: KycScreen },
     { route: Routes.NotFound, screen: NotFoundScreen },
+    { route: Routes.Cfp, screen: CfpScreen },
   ];
 
   const [snackVisible, setSnackVisible] = useState<boolean>(false);

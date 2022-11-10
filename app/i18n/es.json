@@ -60,6 +60,22 @@
         "review": "En revisión",
         "initiating": "La verificación está en preparación, puede llevar un tiempo. Le pedimos que tenga paciencia."
       }
+    },
+    "cfp": {
+      "link": "CFP",
+      "title": "Propuestas actuales para el Fondo Comunitario (CFP) de DeFiChain",
+      "all": "Todas las propuestas del Fondo Comunitario (CFP)",
+      "yes": "Sí",
+      "neutral": "Neutral",
+      "no": "No",
+      "votes": "Votos",
+      "voting": "Votando",
+      "vote_turnout": "Número de votos",
+      "current_result": "Resultado actual",
+      "approved": "Aprobado",
+      "not approved": "No aprobado",
+      "read_proposal": "Leer propuesta",
+      "your_vote": "Su voto"
     }
   }
 }
