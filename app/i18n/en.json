@@ -20,6 +20,11 @@
       "save_failed": "Error while saving!",
       "file_error": "Error reading the file!"
     },
+    "validation": {
+      "required": "Mandatory field",
+      "pattern_invalid": "Invalid format",
+      "code_and_number": "Please fill in area code and number"
+    },
     "model": {
       "user": {
         "edit": "Edit user data",
