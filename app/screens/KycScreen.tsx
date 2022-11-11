@@ -32,6 +32,7 @@ import Colors from "../config/Colors";
 import { KycData } from "../models/KycData";
 import KycDataEdit from "../components/edit/KycDataEdit";
 import Routes from "../config/Routes";
+import StorageService from "../services/StorageService";
 
 const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   const { t } = useTranslation();
@@ -51,22 +52,28 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   const [isFileUploading, setIsFileUploading] = useState(false);
 
   useEffect(() => {
-    // store and reset params
     const params = route.params as any;
-    if (!params?.code) return onError();
 
-    setInputParams(params);
-    nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
+    // fetch code from storage
+    StorageService.getPrimitive(StorageService.Keys.KycCode).then((storageCode) => {
+      const code = params?.code ?? storageCode;
+      if (!code) return onError();
 
-    // get KYC info
-    getKyc(params?.code)
-      .then((result) => {
-        setKycInfo(result);
-        setIsLoading(false);
+      // store and reset params
+      setInputParams(params);
+      StorageService.storeValue(StorageService.Keys.KycCode, code);
+      nav.navigate(Routes.Kyc, { code: undefined, autostart: undefined, phone: undefined, mail: undefined });
 
-        if (params?.autostart) continueKyc(result, params);
-      })
-      .catch(onError);
+      // get KYC info
+      getKyc(code)
+        .then((result) => {
+          setKycInfo(result);
+          setIsLoading(false);
+
+          if (params?.autostart) continueKyc(result, params);
+        })
+        .catch(onError);
+    });
   }, []);
 
   const continueKyc = (info?: KycInfo, params?: any) => {
