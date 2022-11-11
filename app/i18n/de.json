@@ -20,6 +20,11 @@
       "save_failed": "Fehler beim Speichern!",
       "file_error": "Fehler beim Lesen der Datei!"
     },
+    "validation": {
+      "required": "Pflichtfeld",
+      "pattern_invalid": "Ungültiges Format",
+      "code_and_number": "Bitte Vorwahl und Nummer ausfüllen"
+    },
     "model": {
       "user": {
         "edit": "Benutzerdaten bearbeiten",
@@ -76,6 +81,6 @@
       "not approved": "Nicht angenommen",
       "read_proposal": "Proposal lesen",
       "your_vote": "Deine Stimme"
-  }
+    }
   }
 }
