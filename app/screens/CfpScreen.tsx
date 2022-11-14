@@ -22,28 +22,35 @@ import { DeFiButton } from "../elements/Buttons";
 import { CompactCell, CompactRow } from "../elements/Tables";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Routes from "../config/Routes";
+import AuthService, { Session } from "../services/AuthService";
+import withSession from "../hocs/withSession";
 
-const CfpScreen = () => {
+const CfpScreen = ({ session }: { session?: Session }) => {
   const route = useRoute();
   const nav = useNavigation();
 
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [cfpResults, setCfpResults] = useState<CfpResult[]>();
-  const [token, setToken] = useState();
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [votes, setVotes] = useState<CfpVotes | undefined>();
   const [isSaving, setIsSaving] = useState<{ number: Number; vote: CfpVote } | undefined>();
 
   useEffect(() => {
-    // store and reset params
-    const params = route.params as any;
-    if (!params?.token) return nav.navigate(Routes.NotFound);
+    if (!session) return;
 
-    setToken(params.token);
-    nav.navigate(Routes.Cfp, { token: undefined });
+    // check token/session
+    const token = (route.params as any)?.token;
+    if (!token && (!session.isLoggedIn || session.isExpired)) return nav.navigate(Routes.NotFound);
 
-    Promise.all([getCfpResults("latest"), getVotes(params.token)])
+    // update session
+    if (token && session.accessToken !== token) {
+      AuthService.updateSession({ accessToken: token }).finally(() => nav.navigate(Routes.Cfp, { token: undefined }));
+      return;
+    }
+
+    // get the data
+    Promise.all([getCfpResults("latest"), getVotes()])
       .then(([results, votes]) => {
         setCfpResults(results);
         setIsVotingOpen(votingOpen(results));
@@ -51,7 +58,7 @@ const CfpScreen = () => {
       })
       .catch(onLoadFailed)
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [session]);
 
   const votingOpen = (results: CfpResult[]): boolean => {
     if (results.length == 0) return false;
@@ -81,13 +88,11 @@ const CfpScreen = () => {
   };
 
   const onVote = (number: number, vote: CfpVote) => {
-    if (!token) return;
-
     setVotes((votes) => {
       votes = { ...(votes ?? {}), [number]: votes?.[number] === vote ? undefined : vote };
 
       setIsSaving({ number, vote });
-      putVotes(votes, token).finally(() => setIsSaving(undefined));
+      putVotes(votes).finally(() => setIsSaving(undefined));
 
       return votes;
     });
@@ -225,4 +230,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CfpScreen;
+export default withSession(CfpScreen);

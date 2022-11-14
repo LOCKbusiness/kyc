@@ -20,6 +20,11 @@
       "save_failed": "¡Error mientras se guardaba!",
       "file_error": "¡Error al leer el documento!"
     },
+    "validation": {
+      "required": "Campo obligatorio",
+      "pattern_invalid": "Formato inválido",
+      "code_and_number": "Por favor rellena el código de area y el número"
+    },
     "model": {
       "user": {
         "edit": "Edita la información del usuario",

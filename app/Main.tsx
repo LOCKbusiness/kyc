@@ -40,8 +40,8 @@ const Main = () => {
     config: {
       screens: {
         [Routes.Kyc]: "",
-        [Routes.NotFound]: "*",
         [Routes.Cfp]: "cfp",
+        [Routes.NotFound]: "*",
       },
     },
   };
