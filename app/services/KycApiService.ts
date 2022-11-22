@@ -8,7 +8,6 @@ import { CfpResult } from "../models/CfpResult";
 
 const BaseUrl = Environment.api.baseUrl;
 const LanguageUrl = "language";
-const CountryUrl = "country";
 const KycUrl = "kyc";
 const StatisticUrl = "statistic";
 
@@ -29,8 +28,10 @@ export const postFounderCertificate = (files: File[], code?: string): Promise<vo
   return postFiles(`${KycUrl}/${code}/incorporationCertificate`, files);
 };
 
-export const getCountries = (): Promise<Country[]> => {
-  return fetchFrom<Country[]>(CountryUrl).then((countries) => countries.sort((a, b) => (a.name > b.name ? 1 : -1)));
+export const getCountries = (code: string): Promise<Country[]> => {
+  return fetchFrom<Country[]>(`${KycUrl}/${code}/countries`).then((countries) =>
+    countries.sort((a, b) => (a.name > b.name ? 1 : -1))
+  );
 };
 
 export const getLanguages = (): Promise<Language[]> => {
