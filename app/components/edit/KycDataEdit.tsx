@@ -48,7 +48,7 @@ const KycDataEdit = ({ code, kycInfo, kycData, onChanged }: Props) => {
   const [countries, setCountries] = useState<Country[]>([]);
 
   useEffect(() => {
-    getCountries()
+    getCountries(code)
       .then(setCountries)
       .catch(() => NotificationService.error(t("feedback.load_failed")))
       .finally(() => setIsLoading(false));
@@ -122,7 +122,7 @@ const KycDataEdit = ({ code, kycInfo, kycData, onChanged }: Props) => {
       <DeFiPicker
         name="country"
         label={t("model.user.country")}
-        items={countries.filter((c) => c.enable)}
+        items={countries}
         idFunc={(i) => i.id}
         labelFunc={(i) => i.name}
       />
@@ -148,7 +148,7 @@ const KycDataEdit = ({ code, kycInfo, kycData, onChanged }: Props) => {
           <DeFiPicker
             name="organizationCountry"
             label={t("model.user.country")}
-            items={countries.filter((c) => c.enable)}
+            items={countries}
             idFunc={(i) => i.id}
             labelFunc={(i) => i.name}
           />
