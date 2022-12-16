@@ -36,7 +36,7 @@ const KycDataEdit = ({ code, kycInfo, kycData, onChanged }: Props) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<KycData>({ defaultValues: kycData });
+  } = useForm<KycData>({ defaultValues: { ...kycData, accountType: AccountType.PERSONAL } });
   const accountType = useWatch({ control, name: "accountType" });
   const country = useWatch({ control, name: "country" });
 
@@ -91,13 +91,14 @@ const KycDataEdit = ({ code, kycInfo, kycData, onChanged }: Props) => {
     <Form control={control} rules={rules} errors={errors} disabled={isSaving} onSubmit={handleSubmit(onSubmit)}>
       <SpacerV />
       <H3 text={t("model.user.kyc_data")} />
-      <DeFiPicker
+      {/* <DeFiPicker
         name="accountType"
         label={t("model.user.account_type")}
         items={Object.values(AccountType)}
         labelFunc={(i) => t(`model.user.${i.toLowerCase()}`)}
+        disabled
       />
-      <SpacerV />
+      <SpacerV /> */}
 
       {accountType !== AccountType.PERSONAL && <H4 text={t("model.user.personal_info")} />}
 
