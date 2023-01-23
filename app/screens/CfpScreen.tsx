@@ -34,7 +34,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
   const [cfpResults, setCfpResults] = useState<CfpResult[]>();
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [votes, setVotes] = useState<CfpVotes | undefined>();
-  const [isSaving, setIsSaving] = useState<{ number: Number; vote: CfpVote } | undefined>();
+  const [isSaving, setIsSaving] = useState<{ number: string; vote: CfpVote } | undefined>();
 
   useEffect(() => {
     if (!session) return;
@@ -87,7 +87,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
     NotificationService.error(t("feedback.load_failed"));
   };
 
-  const onVote = (number: number, vote: CfpVote) => {
+  const onVote = (number: string, vote: CfpVote) => {
     setVotes((votes) => {
       votes = { ...(votes ?? {}), [number]: votes?.[number] === vote ? undefined : vote };
 
@@ -121,8 +121,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
         ) : (
           <>
             {cfpResults
-              ?.sort((a, b) => a.number - b.number)
-              .map((result) => (
+              ?.map((result) => (
                 <View key={result.number} style={{ width: "100%" }}>
                   <H3 text={result.title} style={AppStyles.center} />
 
