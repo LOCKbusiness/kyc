@@ -187,13 +187,6 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                       disabled={!isVotingOpen}
                       loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
                     />
-                    <RadioButton
-                      label={t("cfp.neutral")}
-                      onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
-                      checked={votes?.[result.number] === CfpVote.NEUTRAL}
-                      disabled={!isVotingOpen}
-                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
-                    />
                   </View>
                   <SpacerV height={50} />
                 </View>
