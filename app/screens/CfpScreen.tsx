@@ -45,9 +45,11 @@ const CfpScreen = ({ session }: { session?: Session }) => {
 
     // update session
     if (token && session.accessToken !== token) {
-      AuthService.updateSession({ accessToken: token }).finally(() => nav.navigate(Routes.Cfp, { token: undefined }));
+      AuthService.updateSession({ accessToken: token });
       return;
     }
+
+    nav.navigate(Routes.Cfp, { token: undefined });
 
     // get the data
     Promise.all([getCfpResults("latest"), getVotes()])
