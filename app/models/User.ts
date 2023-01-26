@@ -42,7 +42,7 @@ export interface KycInfo {
 }
 
 export interface CfpVotes {
-  [number: number]: CfpVote | undefined;
+  [number: string]: CfpVote | undefined;
 }
 
 export enum CfpVote {

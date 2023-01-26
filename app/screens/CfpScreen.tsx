@@ -34,7 +34,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
   const [cfpResults, setCfpResults] = useState<CfpResult[]>();
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [votes, setVotes] = useState<CfpVotes | undefined>();
-  const [isSaving, setIsSaving] = useState<{ number: Number; vote: CfpVote } | undefined>();
+  const [isSaving, setIsSaving] = useState<{ number: string; vote: CfpVote } | undefined>();
 
   useEffect(() => {
     if (!session) return;
@@ -45,9 +45,11 @@ const CfpScreen = ({ session }: { session?: Session }) => {
 
     // update session
     if (token && session.accessToken !== token) {
-      AuthService.updateSession({ accessToken: token }).finally(() => nav.navigate(Routes.Cfp, { token: undefined }));
+      AuthService.updateSession({ accessToken: token });
       return;
     }
+
+    nav.navigate(Routes.Cfp, { token: undefined });
 
     // get the data
     Promise.all([getCfpResults("latest"), getVotes()])
@@ -87,7 +89,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
     NotificationService.error(t("feedback.load_failed"));
   };
 
-  const onVote = (number: number, vote: CfpVote) => {
+  const onVote = (number: string, vote: CfpVote) => {
     setVotes((votes) => {
       votes = { ...(votes ?? {}), [number]: votes?.[number] === vote ? undefined : vote };
 
@@ -121,8 +123,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
         ) : (
           <>
             {cfpResults
-              ?.sort((a, b) => a.number - b.number)
-              .map((result) => (
+              ?.map((result) => (
                 <View key={result.number} style={{ width: "100%" }}>
                   <H3 text={result.title} style={AppStyles.center} />
 
@@ -187,13 +188,6 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                       checked={votes?.[result.number] === CfpVote.NO}
                       disabled={!isVotingOpen}
                       loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
-                    />
-                    <RadioButton
-                      label={t("cfp.neutral")}
-                      onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
-                      checked={votes?.[result.number] === CfpVote.NEUTRAL}
-                      disabled={!isVotingOpen}
-                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
                     />
                   </View>
                   <SpacerV height={50} />
