@@ -68,8 +68,8 @@
     },
     "cfp": {
       "link": "CFP",
-      "title": "Aktuelle DeFiChain CFPs",
-      "all": "Alle CFPs",
+      "title": "Aktuelle DeFiChain Proposals",
+      "all": "Alle Proposals",
       "yes": "Ja",
       "neutral": "Neutral",
       "no": "Nein",
