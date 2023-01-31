@@ -65,11 +65,10 @@ const CfpScreen = ({ session }: { session?: Session }) => {
   const votingOpen = (results: CfpResult[]): boolean => {
     if (results.length == 0) return false;
 
-    const startDate = new Date(results[0].startDate);
     const endDate = new Date(results[0].endDate);
     endDate.setDate(endDate.getDate() - 1);
 
-    return new Date() > startDate && new Date() < endDate;
+    return new Date() < endDate;
   };
 
   const getData = (result: CfpResult): StackedBarChartData => {
