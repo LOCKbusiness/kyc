@@ -32,7 +32,6 @@ const CfpScreen = ({ session }: { session?: Session }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [cfpResults, setCfpResults] = useState<CfpResult[]>();
-  const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [votes, setVotes] = useState<CfpVotes | undefined>();
   const [isSaving, setIsSaving] = useState<{ number: string; vote: CfpVote } | undefined>();
 
@@ -55,21 +54,17 @@ const CfpScreen = ({ session }: { session?: Session }) => {
     Promise.all([getCfpResults("latest"), getVotes()])
       .then(([results, votes]) => {
         setCfpResults(results);
-        setIsVotingOpen(votingOpen(results));
         setVotes(votes);
       })
       .catch(onLoadFailed)
       .finally(() => setIsLoading(false));
   }, [session]);
 
-  const votingOpen = (results: CfpResult[]): boolean => {
-    if (results.length == 0) return false;
-
-    const startDate = new Date(results[0].startDate);
-    const endDate = new Date(results[0].endDate);
+  const votingOpen = (result: CfpResult): boolean => {
+    const endDate = new Date(result.endDate);
     endDate.setDate(endDate.getDate() - 1);
 
-    return new Date() > startDate && new Date() < endDate;
+    return new Date() < endDate;
   };
 
   const getData = (result: CfpResult): StackedBarChartData => {
@@ -179,15 +174,22 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                       label={t("cfp.yes")}
                       onPress={() => onVote(result.number, CfpVote.YES)}
                       checked={votes?.[result.number] === CfpVote.YES}
-                      disabled={!isVotingOpen}
+                      disabled={!votingOpen(result)}
                       loading={isSaving?.number === result.number && isSaving.vote === CfpVote.YES}
                     />
                     <RadioButton
                       label={t("cfp.no")}
                       onPress={() => onVote(result.number, CfpVote.NO)}
                       checked={votes?.[result.number] === CfpVote.NO}
-                      disabled={!isVotingOpen}
+                      disabled={!votingOpen(result)}
                       loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
+                    />
+                    <RadioButton
+                      label={t("cfp.neutral")}
+                      onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
+                      checked={votes?.[result.number] === CfpVote.NEUTRAL}
+                      disabled={!votingOpen(result)}
+                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
                     />
                   </View>
                   <SpacerV height={50} />
