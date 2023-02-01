@@ -43,6 +43,8 @@ export interface CfpResult {
     no: Vote[];
     neutral: Vote[];
   };
-  startDate: string;
+  creationHeight: number;
+  endHeight: number;
   endDate: string;
+  status: string;
 }
