@@ -117,7 +117,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
           <Loading size="large" />
         ) : (
           <>
-            {cfpResults?.sort((a, b) => a.creationHeight -b.creationHeight)
+            {cfpResults?.sort((a, b) => b.creationHeight - a.creationHeight)
               ?.map((result) => (
                 <View key={result.number} style={{ width: "100%" }}>
                   <H3 text={result.title} style={AppStyles.center} />
