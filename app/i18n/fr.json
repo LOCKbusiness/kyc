@@ -80,7 +80,9 @@
       "approved": "Accepté",
       "not approved": "Rejeté",
       "read_proposal": "Lire la proposition",
-      "your_vote": "Votre vote"
+      "your_vote": "Votre vote",
+      "amount": "Montant (DFI)",
+      "type":"Type de proposition"
     }
   }
 }

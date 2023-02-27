@@ -6,13 +6,13 @@ import { AbstractChartConfig } from "react-native-chart-kit/dist/AbstractChart";
 import { StackedBarChartData } from "react-native-chart-kit/dist/StackedBarChart";
 import { DataTable, Text } from "react-native-paper";
 import Colors from "../config/Colors";
-import { CfpResult } from "../models/CfpResult";
+import { CfpResult, LockResults } from "../models/CfpResult";
 import { CfpVote, CfpVotes } from "../models/User";
 import { getCfpResults } from "../services/KycApiService";
 import NotificationService from "../services/NotificationService";
 import AppStyles from "../styles/AppStyles";
 import { openUrl } from "../utils/Utils";
-import { getVotes, putVotes } from "../services/LockApiService";
+import { getVotes, putVotes, getVotingResults } from "../services/LockApiService";
 import AppLayout from "../components/AppLayout";
 import { H1, H3 } from "../elements/Texts";
 import { SpacerV } from "../elements/Spacers";
@@ -32,6 +32,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [cfpResults, setCfpResults] = useState<CfpResult[]>();
+  const [lockResults, setLockResults] = useState<LockResults[]>()
   const [votes, setVotes] = useState<CfpVotes | undefined>();
   const [isSaving, setIsSaving] = useState<{ number: string; vote: CfpVote } | undefined>();
 
@@ -51,10 +52,11 @@ const CfpScreen = ({ session }: { session?: Session }) => {
     nav.navigate(Routes.Cfp, { token: undefined });
 
     // get the data
-    Promise.all([getCfpResults("latest"), getVotes()])
-      .then(([results, votes]) => {
+    Promise.all([getCfpResults("latest"), getVotes(),getVotingResults()])
+      .then(([results, votes, lockResults]) => {
         setCfpResults(results);
         setVotes(votes);
+        setLockResults(lockResults);
       })
       .catch(onLoadFailed)
       .finally(() => setIsLoading(false));
@@ -133,6 +135,14 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                           <CompactCell>ID</CompactCell>
                           <CompactCell>#{result.number}</CompactCell>
                         </CompactRow>
+                        <CompactRow>
+                          <CompactCell>{t("cfp.type")}</CompactCell>
+                          <CompactCell>{t(`${result.type.toUpperCase()}`)}</CompactCell>
+                        </CompactRow>
+                        {result.dfiAmount && <CompactRow>
+                          <CompactCell>{t("cfp.amount")}</CompactCell>
+                          <CompactCell>{t(`${result.dfiAmount}`)}</CompactCell>
+                        </CompactRow>}
                         <CompactRow>
                           <CompactCell>{t("cfp.voting")}</CompactCell>
                           <CompactCell>
