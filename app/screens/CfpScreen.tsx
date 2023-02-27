@@ -141,7 +141,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                         </CompactRow>
                         {result.dfiAmount && <CompactRow>
                           <CompactCell>{t("cfp.amount")}</CompactCell>
-                          <CompactCell>{t(`${result.dfiAmount}`)}</CompactCell>
+                          <CompactCell>{t(`${result.dfiAmount} DFI`)}</CompactCell>
                         </CompactRow>}
                         <CompactRow>
                           <CompactCell>{t("cfp.voting")}</CompactCell>

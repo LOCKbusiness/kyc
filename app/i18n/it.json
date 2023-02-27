@@ -81,8 +81,8 @@
       "read_proposal": "Leggi la proposta",
       "your_vote": "Il tuo voto",
       "title": "Attuali CFP di DeFiChain",
-      "amount": "Importo (DFI)",
-      "type":"Proposal Type"
+      "amount": "Importo",
+      "type":"Tipo di proposta"
     }
   }
 }
