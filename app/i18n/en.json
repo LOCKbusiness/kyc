@@ -12,7 +12,8 @@
       "next": "Next",
       "upload": "Upload",
       "start": "Start",
-      "search": "Search"
+      "search": "Search",
+      "ok": "OK"
     },
     "feedback": {
       "page_not_found": "Page not found!",

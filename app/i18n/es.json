@@ -12,7 +12,8 @@
       "next": "Siguiente",
       "upload": "Subir",
       "start": "Inicio",
-      "search": "Busque en"
+      "search": "Busque en",
+      "ok": "OK"
     },
     "feedback": {
       "page_not_found": "¡Página no encontrada!",

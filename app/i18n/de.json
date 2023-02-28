@@ -12,7 +12,8 @@
       "next": "Weiter",
       "upload": "Hochladen",
       "start": "Start",
-      "search": "Suche"
+      "search": "Suche",
+      "ok": "OK"
     },
     "feedback": {
       "page_not_found": "Seite nicht gefunden!",
