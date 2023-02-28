@@ -1,6 +1,6 @@
 import i18n from "../i18n/i18n";
 import Regex from "./Regex";
-import libphonenumber from "google-libphonenumber";
+import { PhoneNumberUtil } from "google-libphonenumber";
 
 class ValidationsClass {
   public get Required() {
@@ -24,18 +24,15 @@ class ValidationsClass {
   public get Phone() {
     return this.Custom((number: string) => {
       try {
-        const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-        if (number && !number.match(/^\+\d+ .+$/)) {
-          return "validation.code_and_number";
-        } else if (
-          (number && !number.match(/^\+[\d ]*$/)) ||
-          (number && !phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(number)))
-        ) {
-          return "validation.pattern_invalid";
+        if (number) {
+          const util = PhoneNumberUtil.getInstance();
+
+          if (!number.match(/^\+\d{5}/)) return "validation.code_and_number";
+          if (!util.isValidNumber(util.parseAndKeepRawInput(number))) return "validation.pattern_invalid";
         }
 
         return true;
-      } catch (_) {
+      } catch {
         return "validation.pattern_invalid";
       }
     });
