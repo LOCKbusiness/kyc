@@ -17,6 +17,12 @@ interface Vote {
   isCake: boolean;
 }
 
+export interface LockResults {
+  id: string;
+  name: string;
+  result: { yes: number; neutral: number; no: number };
+}
+
 export interface CfpResult {
   number: string;
   title: string;
