@@ -80,7 +80,9 @@
       "approved": "Angenommen",
       "not approved": "Nicht angenommen",
       "read_proposal": "Proposal lesen",
-      "your_vote": "Deine Stimme"
+      "your_vote": "Deine Stimme",
+      "amount": "Betrag",
+      "type":"Proposal Typ"
     }
   }
 }

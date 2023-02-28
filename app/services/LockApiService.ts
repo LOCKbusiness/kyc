@@ -1,5 +1,6 @@
 import { Environment } from "../env/Environment";
 import { ApiError } from "../models/ApiDto";
+import { LockResults } from "../models/CfpResult";
 import { CfpVotes } from "../models/User";
 import AuthService, { Session } from "./AuthService";
 
@@ -14,6 +15,10 @@ export const getVotes = (): Promise<CfpVotes> => {
 
 export const putVotes = (votes: CfpVotes): Promise<CfpVotes> => {
   return fetchFrom<CfpVotes>(`${VotingUrl}/votes`, "PUT", votes);
+};
+
+export const getVotingResults = (): Promise<LockResults[]> => {
+  return fetchFrom<LockResults[]>(`${VotingUrl}/result`);
 };
 
 // --- HELPERS --- //
