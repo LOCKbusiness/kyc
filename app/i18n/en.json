@@ -63,7 +63,9 @@
         "reminded": "In progress",
         "failed": "Failed",
         "review": "In review",
-        "initiating": "Verification is in preparation, it may take a while. We ask for patience."
+        "initiating": "Verification is in preparation, it may take a while. We ask for patience.",
+        "review_title": "Data in Review",
+        "review_text": "Your data will be checked. This usually takes 5 to 10 minutes. Once done we will send you an email."
       }
     },
     "cfp": {
@@ -82,7 +84,7 @@
       "read_proposal": "Read proposal",
       "your_vote": "Your vote",
       "amount": "Amount",
-      "type":"Proposal type"
+      "type": "Proposal type"
     }
   }
 }

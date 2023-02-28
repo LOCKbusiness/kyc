@@ -63,7 +63,9 @@
         "reminded": "En progreso",
         "failed": "Fallido",
         "review": "En revisión",
-        "initiating": "La verificación está en preparación, puede llevar un tiempo. Le pedimos que tenga paciencia."
+        "initiating": "La verificación está en preparación, puede llevar un tiempo. Le pedimos que tenga paciencia.",
+        "review_title": "Datos en revisión",
+        "review_text": "Sus datos serán revisados. Esto suele tardar entre 5 y 10 minutos. Una vez hecho esto, le enviaremos un correo electrónico."
       }
     },
     "cfp": {
@@ -82,7 +84,7 @@
       "read_proposal": "Leer propuesta",
       "your_vote": "Su voto",
       "amount": "Importe",
-      "type":"Tipo de propuesta"
+      "type": "Tipo de propuesta"
     }
   }
 }
