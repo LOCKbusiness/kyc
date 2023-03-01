@@ -12,7 +12,8 @@
       "next": "Weiter",
       "upload": "Hochladen",
       "start": "Start",
-      "search": "Suche"
+      "search": "Suche",
+      "ok": "OK"
     },
     "feedback": {
       "page_not_found": "Seite nicht gefunden!",
@@ -63,7 +64,9 @@
         "reminded": "In Bearbeitung",
         "failed": "Fehlgeschlagen",
         "review": "Wird geprüft",
-        "initiating": "Die Verifizierung ist in Vorbereitung, es kann eine Weile dauern. Wir bitten um Geduld."
+        "initiating": "Die Verifizierung ist in Vorbereitung, es kann eine Weile dauern. Wir bitten um Geduld.",
+        "review_title": "Daten werden geprüft",
+        "review_text": "Deine Daten werden geprüft. Dies dauert in der Regel 5 bis 10 Minuten. Sobald erledigt senden wir Dir eine E-Mail."
       }
     },
     "cfp": {
@@ -82,7 +85,7 @@
       "read_proposal": "Proposal lesen",
       "your_vote": "Deine Stimme",
       "amount": "Betrag",
-      "type":"Proposal Typ"
+      "type": "Proposal Typ"
     }
   }
 }

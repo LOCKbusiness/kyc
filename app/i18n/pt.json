@@ -12,7 +12,8 @@
       "next": "Próximo",
       "upload": "Carregar",
       "start": "Início",
-      "search": "Pesquisa"
+      "search": "Pesquisa",
+      "ok": "OK"
     },
     "feedback": {
       "page_not_found": "Página não encontrada!",
@@ -63,7 +64,9 @@
         "reminded": "Em curso",
         "failed": "Falha",
         "review": "Em Revista",
-        "initiating": "A verificação está em preparação, pode demorar algum tempo. Pedimos a vossa paciência."
+        "initiating": "A verificação está em preparação, pode demorar algum tempo. Pedimos a vossa paciência.",
+        "review_title": "Dados em revisão",
+        "review_text": "Os seus dados serão verificados. Isto leva normalmente 5 a 10 minutos. Uma vez feito, enviar-lhe-emos um e-mail."
       }
     },
     "cfp": {
@@ -82,7 +85,7 @@
       "read_proposal": "Ler proposta",
       "your_vote": "O seu voto",
       "amount": "Montante",
-      "type":"Tipo de Proposta"
+      "type": "Tipo de Proposta"
     }
   }
 }
