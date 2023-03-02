@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AppLayout from "../components/AppLayout";
 import Iframe from "../components/util/Iframe";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -13,10 +13,10 @@ import {
   kycCompleted,
   kycInProgress,
   KycInfo,
-  KycState,
   KycStatus,
   kycNotStarted,
   kycInReview,
+  kycStepInProgress,
 } from "../models/User";
 import { openUrl, pickDocuments } from "../utils/Utils";
 import KycInit from "../components/KycInit";
@@ -51,6 +51,9 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   const [isKycDataEdit, setKycDataEdit] = useState<boolean>(false);
   const [showsKycStartDialog, setShowsKycStartDialog] = useState<boolean>(false);
   const [isFileUploading, setIsFileUploading] = useState(false);
+  const [showsReviewHint, setShowsReviewHint] = useState(false);
+
+  const intervalRef = useRef<NodeJS.Timer>();
 
   useEffect(() => {
     const params = route.params as any;
@@ -78,7 +81,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
   }, []);
 
   const continueAllowed = (info?: KycInfo): boolean =>
-    ![KycState.REVIEW, KycState.FAILED].includes(info?.kycState ?? KycState.NA) && !kycCompleted(info?.kycStatus);
+    kycStepInProgress(info?.kycState) && !kycInReview(info?.kycStatus) && !kycCompleted(info?.kycStatus);
 
   const continueKyc = (info?: KycInfo, params?: any) => {
     if (!continueAllowed(info)) return;
@@ -107,10 +110,17 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
     setTimeout(() => setIsLoading(false), 2000);
 
     // poll for completion
-    setInterval(() => {
+    intervalRef.current = setInterval(() => {
       getKyc(info.kycHash)
         .then((i) => {
-          if (kycInReview(i.kycStatus)) setIsKycInProgress(false);
+          if (!kycInProgress(i.kycStatus) || !kycStepInProgress(i.kycState)) {
+            setIsKycInProgress(false);
+
+            // clear the interval
+            intervalRef.current && clearInterval(intervalRef.current);
+          }
+          if (kycInReview(i.kycStatus, i.kycState)) setShowsReviewHint(true);
+
           setKycInfo(i);
         })
         .catch(console.error);
@@ -205,7 +215,7 @@ const KycScreen = ({ settings }: { settings?: AppSettings }) => {
             )}
             <Iframe src={kycInfo.sessionUrl} />
           </View>
-        ) : kycInReview(kycInfo?.kycStatus) ? (
+        ) : showsReviewHint ? (
           <>
             <View>
               {!settings?.isIframe && <SpacerV height={30} />}
