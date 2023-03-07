@@ -85,7 +85,10 @@
       "your_vote": "Il tuo voto",
       "title": "Attuali CFP di DeFiChain",
       "amount": "Importo",
-      "type": "Tipo di proposta"
+      "type": "Tipo di proposta",
+      "dfip": "DFIP",
+      "cfp": "CFP",
+      "special": "SPECIAL DFIP"
     }
   }
 }
