@@ -137,7 +137,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                         </CompactRow>
                         <CompactRow>
                           <CompactCell>{t("cfp.type")}</CompactCell>
-                          <CompactCell>{t(`${result.type.toUpperCase()}`)}</CompactCell>
+                          <CompactCell>{t(`${result.type== 'special' ? result.type.toUpperCase() + ` DFIP`  : result.type.toUpperCase()}`)}</CompactCell>
                         </CompactRow>
                         {result.dfiAmount && <CompactRow>
                           <CompactCell>{t("cfp.amount")}</CompactCell>
