@@ -74,11 +74,10 @@ const CfpScreen = ({ session }: { session?: Session }) => {
       labels: [],
       legend: [
         `${t("cfp.yes")} (${Math.round((result.totalVotes.yes / result.totalVotes.total) * 100)}%)`,
-        `${t("cfp.neutral")} (${Math.round((result.totalVotes.neutral / result.totalVotes.total) * 100)}%)`,
         `${t("cfp.no")} (${Math.round((result.totalVotes.no / result.totalVotes.total) * 100)}%)`,
       ],
-      data: [[], [result.totalVotes.yes, result.totalVotes.neutral, result.totalVotes.no]],
-      barColors: [Colors.Primary, Colors.White, Colors.Grey400],
+      data: [[], [result.totalVotes.yes, result.totalVotes.no]],
+      barColors: [Colors.Primary, Colors.Grey400],
     };
   };
 
@@ -137,7 +136,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                         </CompactRow>
                         <CompactRow>
                           <CompactCell>{t("cfp.type")}</CompactCell>
-                          <CompactCell>{t(`${result.type.toUpperCase()}`)}</CompactCell>
+                          <CompactCell>{t(`${result.type== 'special' ? result.type.toUpperCase() + ` DFIP`  : result.type.toUpperCase()}`)}</CompactCell>
                         </CompactRow>
                         {result.dfiAmount && <CompactRow>
                           <CompactCell>{t("cfp.amount")}</CompactCell>
@@ -146,7 +145,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                         <CompactRow>
                           <CompactCell>{t("cfp.voting")}</CompactCell>
                           <CompactCell>
-                            {result.totalVotes.yes} / {result.totalVotes.neutral} / {result.totalVotes.no}
+                            {result.totalVotes.yes} / {result.totalVotes.no}
                           </CompactCell>
                         </CompactRow>
                         <CompactRow>
@@ -193,13 +192,6 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                       checked={votes?.[result.number] === CfpVote.NO}
                       disabled={!votingOpen(result)}
                       loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
-                    />
-                    <RadioButton
-                      label={t("cfp.neutral")}
-                      onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
-                      checked={votes?.[result.number] === CfpVote.NEUTRAL}
-                      disabled={!votingOpen(result)}
-                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
                     />
                   </View>
                   <SpacerV height={50} />
