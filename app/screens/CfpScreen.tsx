@@ -137,7 +137,7 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                         </CompactRow>
                         <CompactRow>
                           <CompactCell>{t("cfp.type")}</CompactCell>
-                          <CompactCell>{t(`${result.type.toUpperCase()}`)}</CompactCell>
+                          <CompactCell>{t(`cfp.${result.type}`)}</CompactCell>
                         </CompactRow>
                         {result.dfiAmount && <CompactRow>
                           <CompactCell>{t("cfp.amount")}</CompactCell>
@@ -193,13 +193,6 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                       checked={votes?.[result.number] === CfpVote.NO}
                       disabled={!votingOpen(result)}
                       loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NO}
-                    />
-                    <RadioButton
-                      label={t("cfp.neutral")}
-                      onPress={() => onVote(result.number, CfpVote.NEUTRAL)}
-                      checked={votes?.[result.number] === CfpVote.NEUTRAL}
-                      disabled={!votingOpen(result)}
-                      loading={isSaving?.number === result.number && isSaving.vote === CfpVote.NEUTRAL}
                     />
                   </View>
                   <SpacerV height={50} />

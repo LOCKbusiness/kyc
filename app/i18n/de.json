@@ -85,7 +85,10 @@
       "read_proposal": "Proposal lesen",
       "your_vote": "Deine Stimme",
       "amount": "Betrag",
-      "type": "Proposal Typ"
+      "type": "Proposal Typ",
+      "dfip": "DFIP",
+      "cfp": "CFP",
+      "special": "SPECIAL DFIP"
     }
   }
 }
