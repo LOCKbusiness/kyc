@@ -153,14 +153,14 @@ const CfpScreen = ({ session }: { session?: Session }) => {
                           <CompactCell>#{t("cfp.votes")}</CompactCell>
                           <CompactCell>{result.totalVotes.total}</CompactCell>
                         </CompactRow>
-                        <CompactRow>
+                        {result.totalVotes.turnout && <CompactRow>
                           <CompactCell>{t("cfp.vote_turnout")}</CompactCell>
                           <CompactCell>{result.totalVotes.turnout}%</CompactCell>
-                        </CompactRow>
-                        <CompactRow>
+                        </CompactRow>}
+                        {result.currentResult && <CompactRow>
                           <CompactCell>{t("cfp.current_result")}</CompactCell>
                           <CompactCell>{t(`cfp.${result.currentResult.toLowerCase()}`)}</CompactCell>
-                        </CompactRow>
+                        </CompactRow>}
                       </DataTable>
                     </View>
                     {result.totalVotes.total > 0 && (
